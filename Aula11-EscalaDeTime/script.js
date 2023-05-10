@@ -37,14 +37,14 @@ function addPlayer() {
 
     if (playerToRemove === null){
         window.alert('Erro, esse jogador ainda não foi adicionado!')
-        document.getElementById('numberToRemove').value = ''
+        document.getElementById('removeInput').value = ''
     }
 
     const confirmation = confirm(`Deseja remover ${playerToRemove.innerText}?`) //Use variable.innerText to display the content
 
     if (confirmation){
         document.getElementById('teamList').removeChild(playerToRemove)
-        document.getElementById('numberToRemove').value = ''
+        document.getElementById('removeInput').value = ''
     }
     
   }
