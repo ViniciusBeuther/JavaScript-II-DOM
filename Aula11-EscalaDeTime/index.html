@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Time</title>
+    <script src="script.js"></script>
+    <style>
+        body{
+            background-color: #92eb8c;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1,h2,h3{
+            text-align: center;
+            color: #204505;
+        }
+    </style>
+</head>
+<body>
+    <h1>Escala de Time</h1>
+    <h2>Escale seu time</h2>
+<section id="addPlayer"> 
+        <label for="player">Nome do jogador: </label>
+        <input type="text" name="player" id="player">
+    
+        <label for="shirtNumber">Numero da Camisa: </label>
+        <input type="text" name="shirtNumber" id="number">
+    
+        <label for="position">Posição: </label>
+        <input type="text" name="position" id="position">
+    
+        <button id="add" onclick="addPlayer()">Adicionar</button>
+</section>
+<section id="removePlayer">
+        <h2>Remover jogador</h2>
+        <label for="removePlayers">Numero: </label>
+        <input type="text" name="removePlayer" id="removeInput">
+        <button id="remove" onclick="removePlayer()">Remover</button>
+</section>
+    <h2>Time</h2>
+    <ul id="teamList">
+
+    </ul>
+
+</body>
+</html>
