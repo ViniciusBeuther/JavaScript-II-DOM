@@ -5,6 +5,39 @@ function clearFields(){
         document.getElementById('number').value = ''
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Finished code
+/*
 function addPlayer() {
     // Getting the input data
     const name = document.getElementById('player').value
@@ -48,3 +81,4 @@ function addPlayer() {
     }
     
   }
+  */
