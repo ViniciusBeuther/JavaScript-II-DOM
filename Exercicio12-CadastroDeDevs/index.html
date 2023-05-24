@@ -11,25 +11,32 @@
             background-color: #333333;
             color: #F9F9F9;
         }
+        section#techSection{
+            width: 50%;
+        }
     </style>
-    <script src="script.js"></script>
+    
 </head>
 <body>
     <h1>Cadastro de Devs</h1>
     <h2>Vamos começar...</h2>
 
     <form id="mainForm">
-        <section id="techSection">
+        <section id="techSectionForm">
             <label for="name">Digite o seu nome</label>
             <br>
             <input type="text" id="name" placeholder="Nome...">
             <br>
             <button id="add-tech">Adicionar Tecnologia</button>
-                        
         </section>
         <button type="submit">Concluir</button>
     </form>
+    <form id="addTech">
+        <ul id="techList">
 
-    
+        </ul>
+    </form>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
