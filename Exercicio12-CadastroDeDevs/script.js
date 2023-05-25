@@ -1,40 +1,50 @@
-const addButton = document.getElementById('add-tech')
-addButton.addEventListener('click', addNewTech)
-
-function addNewTech(ev) {
-  ev.preventDefault()
-
-  const ul = document.getElementById('techList')
-  const username = document.createElement('input')
-  const techLabel = document.createElement('label')
-  const breakLine = document.createElement('br')
-
-  //New txt input
-  techLabel.innerText = 'Digite uma tecnologia\n'
-
-  //Creating the elements
-  const radioInput = document.createElement('input')
-  const newTechItem = document.createElement('li')
-  const radio2years = document.createElement('input')
-  const radio5years = document.createElement('input')
-
-  //Creating labels
-  const radioLabel = document.createElement('label')
-  const radio2yearsLabel = document.createElement('label')
-  const radio5yearsLabel = document.createElement('label')
-
-// Defining type of inputs
-  radio5years.type = 'radio'
-  radio2years.type = 'radio'
-  radioInput.type = 'radio'
-
-
-  radioLabel.innerText = '0-2 anos'
-  radio2yearsLabel.innerText - '3-4 anos'
-  radio5yearsLabel.innerText = '5+ anos'
-  
-
-  newTechItem.append(techLabel, username, radioInput, radioLabel, radio2years, radio2yearsLabel, radio5years, radio5yearsLabel, breakLine)
-  
-  ul.appendChild(newTechItem)
+function createLabel(text, htmlFor){    //htmlFor we use the take the for='' in label tag
+    const label = document.createElement('label')
+    label.htmlFor = htmlFor
+    label.innerText = text
+    return label
 }
+
+function createInput(id, name, type = 'text', value = '', placeholder = ''){
+    const input = document.createElement('input')
+    input.id = id
+    input.name = name
+    input.type = type
+    input.value = value
+    input.placeholder = placeholder
+    return input
+}
+
+const addNewTechBtn = document.getElementById('addTechBtn')
+const form = document.getElementById('devForm')
+const devs = []
+let inputRows = 0
+let radioCount = 0
+
+addNewTechBtn.addEventListener('click', function (ev){
+    stackInputs = document.querySelector('#stackInputs')
+    br = document.createElement('br')
+    //Creating a new row
+    newLi = document.createElement('li')
+    newLi.id = "newLi-" + inputRows
+    newLi.className = 'newLi-' + inputRows
+    inputRows++
+
+    const newLabel = createLabel('Nome: ', 'newLi-' + inputRows)
+    const techNameInput = createInput('newLabel-' + inputRows,null,'newLabel')
+
+    console.log(newLi, newLabel)
+    stackInputs.append(newLabel, techNameInput, br)
+
+    //Creating radio input #1   
+    const newRadioLabel = createLabel('0-2 anos', 'radio-'+radioCount)
+    const newRadioInput = createInput('radio-' + radioCount,null,'radio')
+    
+    //Creating radio input #2
+    const newRadioInput2 = 
+
+
+    radioCount++
+    stackInputs.append(newLabel,techNameInput,newRadioInput, newRadioLabel)
+})
+
