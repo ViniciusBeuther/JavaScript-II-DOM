@@ -1,85 +1,101 @@
-function createLabel(text, htmlFor) {
-    const label = document.createElement('label');
-    label.htmlFor = htmlFor;
-    label.innerText = text;
-    return label;
+// Global variables
+const form = document.getElementById('devForm')
+const addButton = document.getElementById('addTechBtn')
+let namingCounter = 0 //Counter to set unique values for id's
+const technologies = []
+const radioList = []
+
+
+function createInput(id, type = 'text', name) {
+    const newInput = document.createElement('input')
+    newInput.id = id
+    newInput.type = 'text'
+    newInput.name = name
+    return (newInput)
 }
 
-function createInput(id, name, type = 'text', value = '', placeholder = '') {
-    const input = document.createElement('input');
-    input.id = id;
-    input.name = name;
-    input.type = type;
-    input.value = value;
-    input.placeholder = placeholder;
-    return input;
+function createLabel(id, forHTML){
+    const newLabel = document.createElement('label')
+    newLabel.id = id
+    newLabel.for = forHTML
+    newLabel.innerText = 'Nome:'
+    return (newLabel)
 }
 
-const addNewTechBtn = document.getElementById('addTechBtn');
-const stackInputs = document.querySelector('#stackInputs');
-const devs = [];
-let inputRows = 0;
-let radioCount = 0;
+function createRadio(id, type = 'radio', name)
+{
+    const newRadioInput = document.createElement('input')
+    newRadioInput.type = 'radio'
+    newRadioInput.id = id
+    newRadioInput.name = name
+    return(newRadioInput)
+}
 
-addNewTechBtn.addEventListener('click', function (ev) {
-    const br = document.createElement('br');
-    const newLi = document.createElement('li');
-    newLi.id = "newLi-" + inputRows;
-    newLi.className = 'newLi-' + inputRows;
+addButton.addEventListener('click', function (ev){
+    ev.preventDefault()
+    const ul = document.getElementById('stackInputs') //Mapping the tecnologies background
 
-    const newLabel = createLabel('Nome: ', 'newLabel-' + inputRows);
-    const techNameInput = createInput('newInput-' + inputRows, null, 'newLabel');
-    inputRows++;
-    stackInputs.append(newLabel, techNameInput, br);
-
-    const newRadioLabel = createLabel('0-2 anos', 'radio-' + radioCount);
-    const newRadioInput = createInput('radio-' + radioCount, 'radio-' + radioCount, 'radio');
+    const techInputName = createInput('technologie-' + namingCounter, 'text', null) // Creating a new text input
+    const techLabel = createLabel('labelTechnologie-' + namingCounter, 'labelTechnologie-' + namingCounter) // Creating a new technologie label
     
-    const newRadioLabel2 = createLabel('2-4 anos', 'radio2-' + radioCount);
-    const newRadioInput2 = createInput('radio2-' + radioCount, 'radio2-' + radioCount, 'radio');
-    
-    const newRadioLabel3 = createLabel('5+ anos', 'radio3-' + radioCount);
-    const newRadioInput3 = createInput('radio3-' + radioCount, 'radio3-' + radioCount, 'radio');
-    
-    radioCount++;
-    
-    const removeButton = document.createElement('button');
-    removeButton.type = 'button';
-    removeButton.innerText = 'Remover';
+    const radio0UpTo2 = createRadio('radio0UpTo2-' + namingCounter, 'radio', '0-2 Anos-' + namingCounter) // Creating first radio
+    const radio0UpTo2Label = createLabel('radio0UpTo2-' + namingCounter, 'forRadio0UpTo2-' + namingCounter)
+    radio0UpTo2Label.innerText = '0-2 Anos'
 
-    removeButton.addEventListener('click', function() {
-        const parentLi = removeButton.parentElement; // access the parent node
-        stackInputs.removeChild(parentLi); // remove Li element
-    });
+    const radio2UpTo4 = createRadio('radio2UpTo4-' + namingCounter, 'radio', '2-4 Anos-' + namingCounter)
+    const radio2UpTo4Label = createLabel('radio2UpTo4-' + namingCounter, 'forRadio2UpTo4-' + namingCounter)
+    radio2UpTo4Label.innerText = '2-4 Anos'
 
-    newLi.append(newLabel, techNameInput, newRadioInput, newRadioLabel, newRadioInput2, newRadioLabel2, newRadioInput3, newRadioLabel3, removeButton);
-    stackInputs.appendChild(newLi);
-});
-
-const submitForm = document.getElementById('registerBtn');
-submitForm.addEventListener('click', function (ev) {
-    ev.preventDefault();
-    const fullname = document.getElementById('fullname').value;
-    const techInputs = document.querySelectorAll('[id^="newInput-"]');
-    const technologiesList = [];
-
-    techInputs.forEach(input => {
-        technologiesList.push(input.value);
-    });
-
-    const radioInputList = document.querySelectorAll('input[type="radio"]:checked');
-
-    radioInputList.forEach(input => {
-        technologiesList.push(input.value);
-    });
-
-    alert(`DEV CADASTRADO!\nNome: ${fullname} Technologies: ${technologiesList}`);
+    const radio5Plus = createRadio('radio5Plus-' + namingCounter, 'radio', '5+ Anos-' + namingCounter)
+    const radio5PlusLabel = createLabel('radio5Plus-' + namingCounter, 'forRadio5Plus-' + namingCounter)
+    radio5PlusLabel.innerText = '5+ Anos'
 
     
-    const addedRows = document.querySelectorAll('[class^="newLi-"]');
-    addedRows.forEach(row => {
-        row.remove();
-    });
+    const removeButton = document.createElement('button') // Create a remove button
+    removeButton.innerText = 'Remover'
+    removeButton.addEventListener('click', function (){ 
+        ul.removeChild(techItem) // remove the techItem
+    })
 
-    document.getElementById('fullname').value = ''
-});
+    const techItem = document.createElement('li')
+
+    techItem.append(techLabel, techInputName, radio0UpTo2, radio0UpTo2Label, radio2UpTo4, radio2UpTo4Label, radio5Plus, radio5PlusLabel, removeButton)
+    
+    console.log(techItem) //- Just for test
+    ul.append(techItem)
+    namingCounter++ 
+    
+    
+})
+
+const registerButton = document.getElementById('registerBtn')
+    registerButton.addEventListener('click', function (ev){
+    ev.preventDefault()
+    const fullname = document.getElementById('fullname')
+    technologies.push(fullname.value)
+
+     const technologiesInputValue = document.querySelectorAll('[id^="technologie-"]')
+     technologiesInputValue.forEach(function (inputValue, index) {
+        technologies.push(inputValue.value)
+      })
+
+    const radioInputSelected = document.querySelectorAll('[id^="radio"]:checked');
+    
+    radioInputSelected.forEach(function (radioElement){
+        radioList.push(radioElement.name)
+    })
+
+    fullname.value = ''
+    
+    for (let i = 0; i < namingCounter; i++)
+    {
+        technologiesInputValue[i].value = ''
+        const radioElements = document.querySelectorAll(`[name="${radioList[i]}"]`)
+        radioElements.forEach(function (radioElement) {
+          radioElement.checked = false
+        })
+    }
+    
+    alert(`Desenvolvedor cadastrado!\nINFO:\n${technologies}!`)
+})
+
